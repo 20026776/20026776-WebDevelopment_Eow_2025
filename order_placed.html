@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="card shadow border-0 text-center">
+    <div class="card-body">
+      <h2 class="mb-4">Order Placed</h2>
+      <p class="mb-4">Your order has been placed successfully. Thank you for shopping with us!</p>
+      <a href="{{ url_for('main.home') }}" class="btn btn-accent btn-lg">Return to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

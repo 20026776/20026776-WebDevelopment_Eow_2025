@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Checkout</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="p-4 border rounded shadow-sm">
+        <h4 class="mb-3">Order Summary</h4>
+        <p>Total Amount: <strong>$ {{ total }}</strong></p>
+        <p>Please enter your shipping and payment details below to complete your order.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <form method="POST" action="{{ url_for('main.checkout') }}">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+          {{ form.full_name.label(class="form-label") }}
+          {{ form.full_name(class="form-control", placeholder="Enter your full name") }}
+        </div>
+        <div class="mb-3">
+          {{ form.shipping_address.label(class="form-label") }}
+          {{ form.shipping_address(class="form-control", placeholder="Enter your shipping address") }}
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            {{ form.city.label(class="form-label") }}
+            {{ form.city(class="form-control", placeholder="City") }}
+          </div>
+          <div class="mb-3 col-md-6">
+            {{ form.state.label(class="form-label") }}
+            {{ form.state(class="form-control", placeholder="State/Province") }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            {{ form.zip_code.label(class="form-label") }}
+            {{ form.zip_code(class="form-control", placeholder="ZIP/Postal Code") }}
+          </div>
+          <div class="mb-3 col-md-6">
+            {{ form.country.label(class="form-label") }}
+            {{ form.country(class="form-control", placeholder="Country") }}
+          </div>
+        </div>
+        <div class="mb-3">
+          {{ form.paypal_email.label(class="form-label") }}
+          {{ form.paypal_email(class="form-control", placeholder="Enter your PayPal email") }}
+        </div>
+        <div class="d-grid">
+          {{ form.submit(class="btn btn-accent btn-lg") }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

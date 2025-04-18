@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .col-custom {
+    flex: 0 0 20%;
+    max-width: 20%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 1200px) {
+    .col-custom {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+  }
+  @media (max-width: 992px) {
+    .col-custom {
+      flex: 0 0 33.33%;
+      max-width: 33.33%;
+    }
+  }
+  @media (max-width: 768px) {
+    .col-custom {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  @media (max-width: 576px) {
+    .col-custom {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+
+  .product-card {
+    border: none;
+  }
+  .product-card img {
+    width: 100%;
+    height: 180px; 
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  .product-card .card-body {
+    padding: 0.75rem;
+    text-align: center;
+  }
+  .product-card .card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .product-card .card-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
+
+<div class="container my-5">
+  {% if query %}
+    <h2 class="mb-4">Search Results for "{{ query }}"</h2>
+  {% endif %}
+
+  {% if products|length == 0 %}
+    <div class="alert alert-warning text-center" role="alert">
+      No results found based on the search query, please change your query and try again.
+    </div>
+  {% else %}
+    <div class="row d-flex product-grid">
+      {% for product in products %}
+        <div class="col-custom d-flex">
+          <div class="card product-card flex-fill shadow-sm">
+            <img src="{{ url_for('static', filename='uploads/products/' ~ product.image) }}" class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+              <h6 class="card-title mb-2">{{ product.title }}</h6>
+              <p class="card-text mb-3">$ {{ product.price }}</p>
+              <a href="{{ url_for('main.product_detail', product_id=product.id) }}" class="btn btn-accent btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
