@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EOW Ltd. Admin Panel</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='logo/favico.png') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Cinzel:wght@700&display=swap" 
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  <style>
+    :root {
+      --main-bg: #f2f0eb;
+      --primary-color: #2a2b2d;
+      --accent-color: #ff7e6b;
+      --secondary-color: #bdbdbd;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--main-bg);
+      font-family: 'Roboto', sans-serif;
+      color: var(--primary-color);
+    }
+
+    .navbar {
+      background-color: transparent;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease;
+    }
+    .navbar-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color) !important;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-brand img {
+      max-height: 50px;
+      margin-right: 0.5rem;
+    }
+    .nav-link {
+      color: var(--primary-color) !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      text-decoration: none !important;
+    }
+    .nav-link:hover {
+      color: var(--accent-color) !important;
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 700;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-accent:hover {
+      background-color: #ff6b58;
+      transform: scale(1.05);
+      color: #fff !important;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      padding: 0.3rem 0.45rem;
+    }
+
+    main.container {
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .alert {
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    footer {
+      background: linear-gradient(45deg, #2a2b2d, #000);
+      color: #fff;
+      padding: 1.5rem 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    footer p {
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #ff7e6b;
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url_for('admin.dashboard') }}">
+        <img src="{{ url_for('static', filename='logo/eowLOGO.png') }}" alt="EOW Ltd. Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" 
+              aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="adminNavbar">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin.manage_products') }}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin.manage_categories') }}">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin.manage_users') }}">Users</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center">
+        <a class="btn btn-accent me-2" href="{{ url_for('main.profile') }}">Profile</a>
+        <a class="btn btn-accent" href="{{ url_for('main.logout') }}" onclick="return confirm('Are you sure you want to logout?');">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-6 text-md-start text-center mb-2 mb-md-0">
+          <p class="mb-0">&copy; 2025 EOW Ltd. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end text-center">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

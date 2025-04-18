@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Add Category</h2>
+  <form method="POST" action="{{ url_for('admin.add_category') }}">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.name.label(class="form-label") }}
+      {{ form.name(class="form-control", placeholder="Enter category name") }}
+    </div>
+    <div class="d-grid">
+      {{ form.submit(class="btn btn-accent") }}
+    </div>
+  </form>
+</div>
+{% endblock %}
