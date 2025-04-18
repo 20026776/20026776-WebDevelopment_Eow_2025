@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h1 class="mb-4" style="font-size: 2.5rem; font-weight: 700; letter-spacing: 0.05em; color: var(--primary-color);">
+        About EOW Ltd.
+      </h1>
+      <p style="font-size: 1rem; line-height: 1.8;">
+        Welcome to EOW Ltd.—your trusted partner in modern e-commerce solutions. We are dedicated to providing high-quality products, exceptional customer service, and a seamless shopping experience. Our commitment to innovation and excellence has made us a leader in the online retail space.
+      </p>
+      <p style="font-size: 1rem; line-height: 1.8;">
+        Founded in 2025, our journey has been driven by our passion for technology and customer satisfaction. We constantly evolve to meet the needs of our clients, ensuring that every interaction is smooth, secure, and enjoyable.
+      </p>
+      <p style="font-size: 1rem; line-height: 1.8;">
+        Thank you for choosing EOW Ltd. as your shopping destination. We look forward to serving you!
+      </p>
+    </div>
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='logo/about-us.jpeg') }}" alt="About Us" class="img-fluid rounded shadow-sm" style="height: 400px;">
+    </div>
+  </div>
+</div>
+{% endblock %}

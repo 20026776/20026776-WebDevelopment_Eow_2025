@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <h1 class="mb-4" style="font-size: 2.5rem; font-weight: 700; letter-spacing: 0.05em; color: var(--primary-color);">
+    Contact Us
+  </h1>
+  <div class="row">
+    <div class="col-md-6">
+      <p style="font-size: 1rem; line-height: 1.8;">
+        If you have any questions, comments, or concerns, we would love to hear from you. Please reach out to us using the contact information below or by filling out the contact form.
+      </p>
+      <ul class="list-unstyled" style="font-size: 1rem; line-height: 1.8;">
+        <li><strong>Email:</strong> support@eowltd.com</li>
+        <li><strong>Phone:</strong> +1 234 567 890</li>
+        <li><strong>Address:</strong> 123 EOW Street, Suite 100, City, Country</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <form method="POST" action="{{ url_for('main.contact') }}">
+        <div class="mb-3">
+          <label for="name" class="form-label" style="font-size: 1rem; font-weight: 600;">Your Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label" style="font-size: 1rem; font-weight: 600;">Your Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label" style="font-size: 1rem; font-weight: 600;">Message</label>
+          <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-accent" style="font-size: 1rem; padding: 0.6rem 1.2rem;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

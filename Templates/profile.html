@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card shadow border-0">
+        <div class="card-header bg-white border-bottom-0 pb-0">
+          <h2 class="mb-0">Your Profile</h2>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="{{ url_for('main.profile') }}" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              {{ form.username.label(class="form-label") }}
+              {{ form.username(class="form-control", placeholder="Enter your username") }}
+            </div>
+            <div class="mb-3">
+              {{ form.profile_pic.label(class="form-label") }}
+              {{ form.profile_pic(class="form-control") }}
+            </div>
+            <div class="mb-3">
+              {{ form.passport.label(class="form-label") }}
+              {{ form.passport(class="form-control", placeholder="Enter passport details") }}
+            </div>
+            <div class="mb-3 form-check">
+              {{ form.two_factor_enabled(class="form-check-input") }}
+              {{ form.two_factor_enabled.label(class="form-check-label") }}
+            </div>
+            <div class="d-grid">
+              {{ form.submit(class="btn btn-accent") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card shadow border-0 text-center">
+        <div class="card-body">
+          <h4 class="mb-4">Profile Picture</h4>
+          {% if current_user.profile_pic %}
+            <img src="{{ url_for('static', filename='uploads/profile/' ~ current_user.profile_pic) }}" 
+                 alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
+          {% else %}
+            <img src="{{ url_for('static', filename='logo/default-user.png') }}" 
+                 alt="Default Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

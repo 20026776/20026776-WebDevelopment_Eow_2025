@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow border-0">
+        <div class="card-header bg-white border-bottom-0 pb-0">
+          <h2 class="text-center">Sign Up</h2>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="{{ url_for('main.signup') }}">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              {{ form.email.label(class="form-label") }}
+              {{ form.email(class="form-control", placeholder="Enter your email") }}
+            </div>
+            <div class="mb-3">
+              {{ form.username.label(class="form-label") }}
+              {{ form.username(class="form-control", placeholder="Enter your username") }}
+            </div>
+            <div class="mb-3">
+              {{ form.password.label(class="form-label") }}
+              {{ form.password(class="form-control", placeholder="Enter your password") }}
+            </div>
+            <div class="mb-3">
+              {{ form.confirm.label(class="form-label") }}
+              {{ form.confirm(class="form-control", placeholder="Repeat your password") }}
+            </div>
+            <div class="d-grid">
+              {{ form.submit(class="btn btn-accent") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
